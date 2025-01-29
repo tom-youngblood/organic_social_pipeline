@@ -28,7 +28,7 @@ This project is a **fully automated data pipeline** that scrapes LinkedIn post e
 │    ├── pb_bq.py             # Formats scraped data and sends it to BigQuery
 │    ├── bq_hs.py             # Formats BigQuery data and sends it to HubSpot
 │
-│── 📁 config/             Co Configs and API keys (excluded from Git)
+│── 📁 config/             # Co Configs and API keys (excluded from Git)
 │    ├── apollo_key.txt
 │    ├── hs_key.txt
 │    ├── pb_link.txt
