@@ -1,0 +1,21 @@
+(base) tomyoungblood@mac scripts % python hs_bq.py
+-NEW ROWS TO PUSH-
+     sourceUserId              name  ...  platform companyId
+117    1416502549  Marie Bernardino  ...  LinkedIn       NaN
+118    1416502549      John Jantsch  ...  LinkedIn       NaN
+
+[2 rows x 10 columns]
+Empty DataFrame
+Columns: [companyId, companyName, companyUrl, followersCount]
+Index: []
+                                               postUrl  ...             postName
+32   https://www.linkedin.com/posts/sean-goldfaden_...  ...                  NaN
+118  https://www.linkedin.com/posts/sean-goldfaden_...  ...  The Referral Engine
+
+[2 rows x 4 columns]
+
+
+Loaded 2 rows into contacts.
+Loaded 0 rows into companies.
+Loaded 2 rows into posts.
+

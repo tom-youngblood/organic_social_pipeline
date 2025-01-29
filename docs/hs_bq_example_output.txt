@@ -1,0 +1,5 @@
+(base) tomyoungblood@mac scripts % python bq_hs.py
+Total Contacts Retrieved: 99
+Number of leads to push: 2
+Successfully pushed: Marie Bernardino
+Successfully pushed: John Jantsch
