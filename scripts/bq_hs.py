@@ -8,7 +8,7 @@ def bq_query_table(api_key_path, query):
     results = query_job.result()
     return results.to_dataframe()
 
-def hs_prepare_request(api_key_path, list_id):
+def hs_prepare_request(url, api_key_path):
     # HubSpot Private App Token
     api_key = open(api_key_path, 'r').read().strip()
 
@@ -18,13 +18,7 @@ def hs_prepare_request(api_key_path, list_id):
         "Content-Type": "application/json"
     }
 
-    # HubSpot API URL for fetching all contacts in a list
-    url = f"https://api.hubapi.com/contacts/v1/lists/{list_id}/contacts/all?property=hs_linkedin_url"
-
-    # List ID (Replace with your actual List ID)
-    list_id = list_id
-
-    return api_key, headers, url, list_id
+    return api_key, headers, url
 
 def hs_fetch_list_contacts(api_key, headers, url, list_id):
     contacts = []
@@ -93,10 +87,6 @@ def hs_push_contacts_to_list(api_key, new_leads):
     else:
         print("No new leads pushed")
 
-def bq_hs_trigger(request):
-    main()
-    return "bq_hs.py execution triggered.", 200
-
 def main():
     # Query BigQuery for contact information and Post Names to send to Hubspot
     query = """
@@ -115,7 +105,10 @@ def main():
     bq_leads = bq_query_table("../config/skilled-tangent-448417-n8-3c729616b7f2.json", query).drop_duplicates(subset="profileLink")
 
     # Prepare HubSpot Contact List request
-    api_key, headers, url, list_id = hs_prepare_request("../config/hs_key.txt", 246)
+    # HubSpot API URL for fetching all contacts in a list
+    list_id = 246
+    url = f"https://api.hubapi.com/contacts/v1/lists/{list_id}/contacts/all?property=hs_linkedin_url"
+    api_key, headers, url = hs_prepare_request(url, "../config/hs_key.txt")
 
     # Fetch all contacts from the HubSpot list
     all_contacts = hs_fetch_list_contacts(api_key, headers, url, list_id)
@@ -129,4 +122,5 @@ def main():
     # Push new leads to hubspot
     hs_push_contacts_to_list(api_key, new_leads)
 
-main()
+if __name__ == "__main__":
+    main()

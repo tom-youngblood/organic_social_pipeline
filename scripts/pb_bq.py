@@ -145,4 +145,5 @@ def main():
         companies=new_companies,
         posts=new_posts)
 
-main()
+if __name__ == "__main__":
+    main()
