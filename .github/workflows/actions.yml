@@ -1,7 +1,6 @@
 name: run all
 
 on:
-  schedule:
   workflow_dispatch:
 
 jobs:
