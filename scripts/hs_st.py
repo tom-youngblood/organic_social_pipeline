@@ -7,7 +7,6 @@ import json
 def main():
     # Parameters for HubSpot API Pull
     HUBSPOT_API_KEY = os.getenv("HUBSPOT_API_KEY")
-    print(HUBSPOT_API_KEY)
     list_id = 246
 
     # Define the list of properties
@@ -42,9 +41,14 @@ def main():
     df = funcs.HS.parse_hubspot_contacts(contacts)
     print(df)
 
-    # Save temp data
-    df.to_csv("../temp_data/temp_data.csv")
+    # Ensure temp_data exists
+    temp_data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../temp_data"))
+    os.makedirs(temp_data_dir, exist_ok=True)
 
+    # Save temp data
+    output_path = os.path.join(temp_data_dir, "temp_data.csv")
+    df.to_csv(output_path, index=False)
+    print(f"Saved CSV to {output_path}")
 
 if __name__ == "__main__":
     main()
